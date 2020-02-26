@@ -1,10 +1,10 @@
 const { check, validationResult } = require('express-validator');
 
-exports.validateAuth =  [
+exports.validateSignUp =  [
 
     check('nombre')
-        .exists().withMessage('El campo nombre es requerido.')
-        //.isLength({min: 1 , max: 50}).withMessage('firstName should not be empty, should be more than one and less than 50 character')
+        .exists().withMessage('No se encontró referencia del campo nombre.')
+        .not().isEmpty().withMessage('El campo nombre es requerido.')
         .trim(),
     (req,res,next)=> { 
         const errors = validationResult(req);
@@ -15,8 +15,8 @@ exports.validateAuth =  [
     },
 
     check('apellido')
-        .exists().withMessage('El campo apellido es requerido.')
-        //.isLength({min: 1 , max: 50}).withMessage('firstName should not be empty, should be more than one and less than 50 character')
+        .exists().withMessage('No se encontró referencia del campo apellido.')
+        .not().isEmpty().withMessage('El campo apellido es requerido.')
         .trim(),
     (req,res,next)=> { 
         const errors = validationResult(req);
@@ -28,8 +28,8 @@ exports.validateAuth =  [
 
 
     check('username')
-        .exists().withMessage('El campo username es requerido.')
-        //.isLength({min: 1 , max: 50}).withMessage('firstName should not be empty, should be more than one and less than 50 character')
+        .exists().withMessage('No se encontró referencia del campo username.')
+        .not().isEmpty().withMessage('El campo username es requerido.')
         .trim(),
     (req,res,next)=> { 
         const errors = validationResult(req);
@@ -41,19 +41,24 @@ exports.validateAuth =  [
 
 
     check('clave')
-        .exists().withMessage('El campo clave es requerido.')
+        .exists().withMessage('No se encontró referencia del campo clave.')
+        .not().isEmpty().withMessage('El campo clave es requerido.')
+        .matches(/^[a-zA-Z0-9]{8}$/, "i").withMessage('La clave debe ser alfanumérica.')
         .isAlphanumeric().withMessage('La clave debe ser alfanumerica.')
-        .matches(/^[0-9a-zA-Z]+$/).withMessage('ojo')
         .isLength({min: 8, max: 8}).withMessage('La clave debe contener 8 caracteres.')
         .trim(),
     (req,res,next)=> {
 
+        const errors = validationResult(req);
+        if (!errors.isEmpty()) {
+            return res.status(422).json({ errors: errors.array() });
+        }
         next()
     },
 
     check('moneda')
-        .exists().withMessage('El campo moneda es requerido.')
-        //.isLength({min: 1 , max: 50}).withMessage('firstName should not be empty, should be more than one and less than 50 character')
+        .exists().withMessage('No se encontró referencia del campo moneda.')
+        .not().isEmpty().withMessage('El campo moneda es requerido.')
         .trim(),
     (req,res,next)=> { 
         const errors = validationResult(req);

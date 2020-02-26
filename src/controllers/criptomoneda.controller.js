@@ -1,8 +1,10 @@
 let _criptomonedaService = null;
+let _branewcoinService = null;
 class CriptomonedaController {
 
-    constructor({CriptomonedaService}){
+    constructor({CriptomonedaService, BraveNewCoinService}){
         _criptomonedaService = CriptomonedaService;
+        _branewcoinService = BraveNewCoinService;
     }
 
 
@@ -21,12 +23,27 @@ class CriptomonedaController {
     }
 
 
-    async createCriptomoneda(){
+    async createCriptomoneda(req, res){
+        
         const {body} = req;
 
-        const criptomonedaNueva = await _criptomonedaService.createCriptomoneda(body);
+        console.log("body agregar criptpmonedas: ", body.conversion)
 
-        return res.send(criptomonedaNueva);
+    
+       let conversionMoneda = await _branewcoinService.getConversionMoneda(body.conversion);
+
+       body.precio = conversionMoneda.to_quantity;
+
+       delete body.conversion
+
+
+       console.log("body procesado: ", body)
+
+       //console.log("conversionMoneda: ", JSON.stringify(conversionMoneda,null,4));
+
+        //const criptomonedaNueva = await _criptomonedaService.createCriptomoneda(body);
+
+        return res.send(conversionMoneda);
 
     }
 
