@@ -19,7 +19,7 @@ const Criptomoneda = db.define('criptomoneda', {
         type: Sequelize.INTEGER,
         allowNull: false
     },
-    fk_usuario: {
+    usuario_id: {
         type: Sequelize.INTEGER,
         allowNull: false
     }
@@ -28,6 +28,6 @@ const Criptomoneda = db.define('criptomoneda', {
     freezeTableName: true
 });
 
-Criptomoneda.belongsTo(Usuario, {foreignKey: 'fk_usuario', sourceKey: 'id'});
+Criptomoneda.belongsTo(Usuario, {foreignKey: 'usuario_id', sourceKey: 'id'});
 
   module.exports = Criptomoneda;

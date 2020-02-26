@@ -1,28 +1,32 @@
 const sequelize = require('sequelize');
 const Usuario = require("../models/user.model");
+const bcrypt = require("bcrypt");
 class UsuarioRepository{
 
     async getUsuarioByUsername(username) {
-        return await sequelize.query('spcName :param1, :param2, :param3, :param4)', {replacements: {param1: value, param2: value, param3: value, param4: value}, type: sequelize.QueryTypes.SELECT})
+        
+        return Usuario.findAll({
+            where: {
+              username: username
+            }
+          });
  
     }
 
     async getUsuarioById(usuarioId) {
        
-        return Usuario.findAll({
+        Usuario.findAll({
             where: {
               id: usuarioId
             }
           });
-       
-        //return await sequelize.query('spcName :param1, :param2, :param3, :param4)', {replacements: {param1: value, param2: value, param3: value, param4: value}, type: sequelize.QueryTypes.SELECT})
  
     }
 
     
     async createUsuario(usuario){
-    
-        return await sequelize.query('spcName :param1, :param2, :param3, :param4)', {replacements: {param1: value, param2: value, param3: value, param4: value}, type: sequelize.QueryTypes.SELECT})
+         usuario.clave = await bcrypt.hashSync(usuario.clave, 10);
+        return await Usuario.create(usuario);
     }
 
 }

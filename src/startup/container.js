@@ -14,7 +14,7 @@ const {HomeController, UsuarioController, CriptomonedaController, AuthController
 
 
 //Routes
-const {HomeRoutes, UsuarioRoutes, CriptomonedaRoutes} = require('../routes/index.routes')
+const {HomeRoutes, UsuarioRoutes, CriptomonedaRoutes, AuthRoutes} = require('../routes/index.routes')
 const Routes = require('../routes');
 
 //Models
@@ -47,7 +47,8 @@ container
 }).register({
     HomeRoutes: asFunction(HomeRoutes).singleton(),
     UsuarioRoutes: asFunction(UsuarioRoutes).singleton(),
-    CriptomonedaRoutes: asFunction(CriptomonedaRoutes).singleton()
+    CriptomonedaRoutes: asFunction(CriptomonedaRoutes).singleton(),
+    AuthRoutes: asFunction(AuthRoutes).singleton()
 }).register({
     Usuario: asValue(Usuario),
     Criptomoneda: asValue(Criptomoneda)

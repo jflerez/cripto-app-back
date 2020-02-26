@@ -1,4 +1,5 @@
 const {generateToken} = require('../helpers/jwt.helper');
+const bcrypt = require("bcrypt");
 let _usuarioService = null;
 
 class AuthService {
@@ -8,14 +9,14 @@ class AuthService {
 
     async signUp(usuario){
 
-        const {usermane} = usuario;
+        const {username} = usuario;
 
-        const userExist = _usuarioService.getUsuarioByUsername(usermane);
+        const userExist = await _usuarioService.getUsuarioByUsername(username);
 
-        if(userExist){
+        if(userExist[0]){
             const error = new Error();
             error.status = 401;
-            error.message = "El usuario " + usermane + " ya se encuentra registrado.";
+            error.message = "El username " + username + " ya se encuentra registrado.";
             throw error;
         }
 
@@ -26,19 +27,20 @@ class AuthService {
 
     async singnIn(usuario){
 
-  const {usermane, clave} = usuario;
+  const {username, clave} = usuario;
 
-  const userExist = _usuarioService.getUsuarioByUsername(usermane);
+  const userExist = await _usuarioService.getUsuarioByUsername(username);
 
-        if(!userExist){
+  console.log("userExist: ", userExist[0].clave)
+
+        if(!userExist[0]){
             const error = new Error();
             error.status = 404;
-            error.message = "El usuario " + usermane + " no se encuentra registrado.";
+            error.message = "El usuario " + username + " no se encuentra registrado.";
             throw error;
         }
 
-
-        const validPassword = userExist.validPassword(clave);
+        const validPassword = bcrypt.compareSync(clave, userExist[0].clave);
         
         if(!validPassword){
 

@@ -1,4 +1,4 @@
-const {compareSync, hashSync,genSaltSync} = require('bcryptjs');
+
 const Sequelize = require('sequelize');
 const db = require('../config/db')
 const Usuario = db.define('usuario', {
@@ -21,15 +21,8 @@ const Usuario = db.define('usuario', {
     clave: Sequelize.STRING,
     moneda: Sequelize.STRING,
 }, {
-    freezeTableName: true,
-    instanceMethods: {
-        generateHash(clave) {
-            return hashSync(clave, bcrypt.genSaltSync(10));
-        },
-        validPassword(clave) {
-            return compareSync(clave, this.clave);
-        }
-    }
+    timestamps: false,
+    freezeTableName: true
 });
 
   module.exports = Usuario;

@@ -1,6 +1,6 @@
 const Sequelize = require('sequelize');
 
-const db = new Sequelize('criptobd','root','desarrollo',{
+const db = new Sequelize('criptobd','root','',{
     host: 'localhost',
     port: 3306,
     dialect: 'mysql'
