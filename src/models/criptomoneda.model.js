@@ -25,6 +25,7 @@ const Criptomoneda = db.define('criptomoneda', {
     }
     
 }, {
+    timestamps: false,
     freezeTableName: true
 });
 
