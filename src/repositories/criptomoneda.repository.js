@@ -2,8 +2,6 @@ const sequelize = require('sequelize');
 const Criptomoneda = require("../models/criptomoneda.model");
 class CriptomonedaRepository{
 
-    
-
     async getCriptomonedasByUsuario(usuarioId) {
         
         return Criptomoneda.findAll({
@@ -23,10 +21,9 @@ class CriptomonedaRepository{
  
     }
 
-
     async createCriptomoneda(criptomoneda){
     
-        return await sequelize.query('spcName :param1, :param2, :param3, :param4)', {replacements: {param1: value, param2: value, param3: value, param4: value}, type: sequelize.QueryTypes.SELECT})
+        return await Criptomoneda.create(criptomoneda);
     }
 
 }

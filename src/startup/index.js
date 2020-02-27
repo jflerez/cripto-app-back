@@ -3,6 +3,15 @@ const express = require("express");
 let _express = null;
 let _config = null;
 
+// const app = express();
+// app.use(router)
+
+// app.listen(config.PORT, ()=> {
+//                   console.log("Api corriendo en el puerto: ", config.PORT);
+//               })
+
+//               module.exports = app;
+
 class Server{
 
     constructor({config, router}){
@@ -10,6 +19,10 @@ class Server{
         _config = config;
         _express = express().use(router);
 
+    }
+
+    app(){
+        return _express;
     }
 
     start(){

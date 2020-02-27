@@ -16,6 +16,7 @@ class CriptomonedaController {
 
     async getCriptomonedasTopByUsuario(req, res){
 
+        console.log("req.usuario controller: ", req.usuario.id)
         const {usuarioId} = req.params;
         const usuario = await _criptomonedaService.getCriptomonedasTopByUsuario(usuarioId);
         return res.send(usuario);
@@ -29,13 +30,14 @@ class CriptomonedaController {
 
         console.log("body agregar criptpmonedas: ", body.conversion)
 
+        const conversion = {qty: body.precio, from: body.nombre, to: req.usuario.moneda}
+
     
-       let conversionMoneda = await _branewcoinService.getConversionMoneda(body.conversion);
+       let conversionMoneda = await _branewcoinService.getConversionMoneda(conversion);
 
        body.precio = conversionMoneda.to_quantity;
 
-       delete body.conversion
-
+       const criptomonedaNueva = await _criptomonedaService.createCriptomoneda(body);
 
        console.log("body procesado: ", body)
 

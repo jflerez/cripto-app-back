@@ -9,7 +9,7 @@ class UsuarioRepository{
             where: {
               username: username
             }
-          });
+          }).get(0);
  
     }
 

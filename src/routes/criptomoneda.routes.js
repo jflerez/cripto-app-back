@@ -6,7 +6,7 @@ module.exports = ({CriptomonedaController})=>{
 const router = Router();
 
 router.get("/:usuarioId", AuthMiddleware, CriptomonedaController.getCriptomonedasByUsuario);
-router.get("/top/:usuarioId", CriptomonedaController.getCriptomonedasTopByUsuario);
+router.get("/top/:usuarioId", AuthMiddleware, CriptomonedaController.getCriptomonedasTopByUsuario);
 router.post("/agregar",CriptomonedaController.createCriptomoneda);
 // router.post("/agregar", [validateConversionMoneda,AuthMiddleware],CriptomonedaController.createCriptomoneda);
 return router;

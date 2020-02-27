@@ -13,7 +13,7 @@ class AuthService {
 
         const userExist = await _usuarioService.getUsuarioByUsername(username);
 
-        if(userExist[0]){
+        if(userExist){
             const error = new Error();
             error.status = 401;
             error.message = "El username " + username + " ya se encuentra registrado.";
@@ -31,16 +31,16 @@ class AuthService {
 
   const userExist = await _usuarioService.getUsuarioByUsername(username);
 
-  console.log("userExist: ", userExist[0].clave)
+  console.log("userExist: ", userExist.clave)
 
-        if(!userExist[0]){
+        if(!userExist){
             const error = new Error();
             error.status = 404;
             error.message = "El usuario " + username + " no se encuentra registrado.";
             throw error;
         }
 
-        const validPassword = bcrypt.compareSync(clave, userExist[0].clave);
+        const validPassword = bcrypt.compareSync(clave, userExist.clave);
         
         if(!validPassword){
 
@@ -57,7 +57,7 @@ class AuthService {
 
         const token = generateToken(userToEncode);
 
-        return {token, usuario: userExist};
+        return {token, usuario: userToEncode};
 
 
     }

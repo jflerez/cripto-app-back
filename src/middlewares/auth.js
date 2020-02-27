@@ -1,9 +1,10 @@
 const jwt = require("jsonwebtoken");
 const {JWT_SECRET} = require("../config");
 
-module.exports = (req,next)=>{
+module.exports = (req,res,next)=>{
 
     const token = req.headers["authorization"];
+    
     
     if(!token){
         const error = new Error();
@@ -17,20 +18,15 @@ module.exports = (req,next)=>{
         if(err){
             const error = new Error();
             error.status = 401;
-            error.message = "Token invalido";
+            error.message = err.message === "jwt expired" ? "El token ha expirado." : "Token invalido";
             throw error;
 
         }
 
-
-        if(decodeToken.expiresIn <= moment().unix()) {
-           const error = new Error();
-            error.status = 401;
-            error.message = "El token ha expirado.";
-            throw error;
-         }
-
+        
         req.usuario = decodeToken.usuario;
+        console.log("req.usuario",decodeToken.usuario.id)
+
         next();
 
     });
