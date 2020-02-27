@@ -22,7 +22,7 @@ describe('Usuarios', () => {
     });
   
     // describe('/GET users', () => {
-    //   it('should get all users', async () => {
+    //   it('should get one user by name', async () => {
     //     await testHelpers.generateUsers();
     //     const user = await testHelpers.getOneRandomUser();
     //     const res = await testHelpers.withLogin(
