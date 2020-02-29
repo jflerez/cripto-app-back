@@ -31,8 +31,6 @@ class AuthService {
 
   const userExist = await _usuarioService.getUsuarioByUsername(username);
 
-  console.log("userExist: ", userExist.clave)
-
         if(!userExist){
             const error = new Error();
             error.status = 404;
