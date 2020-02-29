@@ -3,7 +3,7 @@ const config = require('../config');
 
 class BraveNewCoinService {
 
-    async getListadoMonedas(){
+    async getListadoMonedas(from,to){
         try {
 
             let params = {
@@ -17,8 +17,9 @@ class BraveNewCoinService {
               }
 
           let response = await axios.get(`${ config.URL_BRAVENEWCOIN }${ config.PATH_PRICES }`, {params, headers});
-          console.log('Response monedas:', response.data)
-          return response.data;
+          let listMonedas = response.data.prices;
+          return listMonedas.length > 0 ? listMonedas.slice(from,to) : [];
+
         } catch (error) {
           console.error("error al listar monedas: ", error)
         }

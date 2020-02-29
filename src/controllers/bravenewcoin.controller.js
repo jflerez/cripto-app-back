@@ -6,8 +6,11 @@ class BraveNewCoinController {
     }
 
     async getListadoMonedas(req, res){
-    
-        const listMonedas = await _braveNewCoinService.getListadoMonedas();
+          const {query} = req;
+          console.log("query: " + JSON.stringify(query,null,4))
+          let from = Number(query.from);
+          let to = Number(query.to);
+        const listMonedas = await _braveNewCoinService.getListadoMonedas(from,to);
         return res.send(listMonedas);
     }
 
