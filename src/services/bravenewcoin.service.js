@@ -18,7 +18,11 @@ class BraveNewCoinService {
 
           let response = await axios.get(`${ config.URL_BRAVENEWCOIN }${ config.PATH_PRICES }`, {params, headers});
           let listMonedas = response.data.prices;
-          return listMonedas.length > 0 ? listMonedas.slice(from,to) : [];
+          console.log("listMonedas.length: ", listMonedas.length)
+          return {
+            totalPrices: listMonedas.length,
+            prices: listMonedas.length > 0 ? listMonedas.slice(from,to) : []
+          }
 
         } catch (error) {
           console.error("error al listar monedas: ", error)
