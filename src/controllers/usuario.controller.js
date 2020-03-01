@@ -1,15 +1,17 @@
 let _usuarioService = null;
+let _criptomonedaService = null;
 class UsuarioController {
 
-    constructor({UsuarioService}){
+    constructor({UsuarioService, CriptomonedaService}){
         _usuarioService = UsuarioService;
+        _criptomonedaService = CriptomonedaService;
     }
 
-    async get(req, res){
+    async getCriptomonedasByUsuario(req, res){
         console.log("llegando")
-        const {usuarioId} = req.params;
+        let usuarioId = req.usuario.id
         console.log("usuarioId:", usuarioId)
-        const usuario = await _usuarioService.getUsuarioById(usuarioId);
+        const usuario = await _criptomonedaService.getCriptomonedasByUsuario(usuarioId);
         return res.send(usuario);
     }
 
