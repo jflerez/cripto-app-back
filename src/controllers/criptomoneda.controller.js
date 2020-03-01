@@ -28,14 +28,15 @@ class CriptomonedaController {
         
         const {body} = req;
 
-        console.log("body agregar criptpmonedas: ", body.conversion)
+        console.log("req.usuario moneda: ", req.usuario.moneda)
 
-        const conversion = {qty: body.precio, from: body.nombre, to: req.usuario.moneda}
+        const conversion = {qty: body.precio, from: body.fuente, to: req.usuario.moneda}
 
-    
+       //Se realiza la conversión de la moneda antes de guardar
        let conversionMoneda = await _branewcoinService.getConversionMoneda(conversion);
 
        body.precio = conversionMoneda.to_quantity;
+       body.usuario_id = req.usuario.id;
 
        const criptomonedaNueva = await _criptomonedaService.createCriptomoneda(body);
 
@@ -45,7 +46,7 @@ class CriptomonedaController {
 
         //const criptomonedaNueva = await _criptomonedaService.createCriptomoneda(body);
 
-        return res.send(conversionMoneda);
+        return res.send(criptomonedaNueva);
 
     }
 

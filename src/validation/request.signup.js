@@ -43,9 +43,8 @@ exports.validateSignUp =  [
     check('clave')
         .exists().withMessage('No se encontró referencia del campo clave.')
         .not().isEmpty().withMessage('El campo clave es requerido.')
-        .matches(/^[a-zA-Z0-9]{8}$/, "i").withMessage('La clave debe ser alfanumérica.')
-        .isAlphanumeric().withMessage('La clave debe ser alfanumerica.')
         .isLength({min: 8, max: 8}).withMessage('La clave debe contener 8 caracteres.')
+        .matches(/^[A-Za-z0-9]+$/g).withMessage('La clave debe ser alfanumérica.')
         .trim(),
     (req,res,next)=> {
 

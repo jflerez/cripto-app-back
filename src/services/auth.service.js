@@ -48,9 +48,12 @@ class AuthService {
             throw error;
         }
 
+        console.log("moneda del usuario: ", JSON.stringify(userExist,null,4))
+
         const userToEncode = {
             username: userExist.username,
-            id: userExist.id
+            id: userExist.id,
+            moneda: userExist.moneda
         };
 
         const token = generateToken(userToEncode);

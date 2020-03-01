@@ -1,5 +1,5 @@
 const {Router} = require("express");
-const {validateConversionMoneda} = require("../validation/request.moneda");
+const {validateConversionMoneda} = require("../validation/request.conversionmoneda");
 const {validateListMoneda} = require("../validation/request.listamonedas");
 
 module.exports = ({BraveNewCoinController})=>{

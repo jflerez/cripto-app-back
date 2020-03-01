@@ -25,7 +25,7 @@ module.exports = (req,res,next)=>{
 
         
         req.usuario = decodeToken.usuario;
-        console.log("req.usuario",decodeToken.usuario.id)
+        console.log("req.usuario",JSON.stringify(decodeToken.usuario,null,4))
 
         next();
 
