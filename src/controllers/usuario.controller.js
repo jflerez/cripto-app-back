@@ -8,19 +8,12 @@ class UsuarioController {
     }
 
     async getCriptomonedasByUsuario(req, res){
-        console.log("llegando")
+        
         let usuarioId = req.usuario.id
         console.log("usuarioId:", usuarioId)
         const usuario = await _criptomonedaService.getCriptomonedasByUsuario(usuarioId);
         return res.send(usuario);
     }
-
-
-    async createUsuario(){
-        const {body} = req;
-
-    }
-
 }
 
 

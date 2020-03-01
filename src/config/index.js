@@ -16,5 +16,6 @@ module.exports = {
     CONTENT_TYPE: process.env.CONTENT_TYPE,
     URL_BRAVENEWCOIN: process.env.URL_BRAVENEWCOIN,
     PATH_PRICES: process.env.PATH_PRICES,
-    PATH_CONVERT: process.env.PATH_CONVERT
+    PATH_CONVERT: process.env.PATH_CONVERT,
+    SWAGGER_PATH: `../config/${process.env.SWAGGER_DOC}.json`
 };

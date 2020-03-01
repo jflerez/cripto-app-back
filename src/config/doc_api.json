@@ -1,0 +1,438 @@
+{
+    "swagger": "2.0",
+    "info": {
+      "description": "Backend: Api para la gestión de criptomonedas.",
+      "version": "1.0.0",
+      "title": "Criptomonedas API"
+    },
+    "host": "cripto-app.herokuapp.com",
+    "basePath": "/v1/api",
+    "tags": [
+      {
+        "name": "Usuario",
+        "description": "Gestión de Usuarios"
+      },
+  
+      {
+        "name": "Criptomonedas",
+        "description": "Gestión monedas"
+      }
+  
+    ],
+    "schemes": ["https"],
+    "paths": {
+      "/auth/signin": {
+        "post": {
+          "tags": ["Usuario"],
+          "summary": "Login de usuario",
+          "description": "",
+          "produces": ["application/json"],
+          "parameters": [
+            {
+              "name": "body",
+              "in": "body",
+              "required": true,
+              "schema": {
+              "$ref": "#/definitions/LoginRequest"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "successful operation",
+              "schema": {
+                "$ref": "#/definitions/LoginResponse"
+              }
+            },
+            "400": {
+              "description": "Bad Request"
+            }
+          }
+        }
+      },
+      "/auth/signup": {
+        "post": {
+          "tags": ["Usuario"],
+          "summary": "Registro de usuario",
+          "description": "",
+          "produces": ["application/json"],
+          "parameters": [
+            {
+              "name": "body",
+              "in": "body",
+              "required": true,
+              "schema": {
+              "$ref": "#/definitions/RegistroUsuarioRequest"
+              }
+            }
+          ],
+          "responses": {
+            "201": {
+              "description": "successful operation",
+              "schema": {
+                "$ref": "#/definitions/RegistroUsuarioResponse"
+              }
+            },
+            "400": {
+              "description": "Bad Request"
+            }
+          }
+        }
+      },
+      "/moneda/lista": {
+        "get": {
+          "tags": ["Criptomonedas"],
+          "summary": "Obtener listado de precios de criptomonedas",
+          "description": "Listado paginado de precios de monedas",
+          "produces": ["application/json"],
+          "parameters": [
+            {
+              "name": "from",
+              "in": "query",
+              "type": "number",
+              "description": "indice registros",
+              "required": true
+            },
+  
+            {
+              "name": "to",
+              "in": "query",
+              "type": "number",
+              "description": "cantidad registros",
+              "required": true
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "successful operation",
+              "schema": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/definitions/CriptomonedaListaResponse"
+                }
+              }
+            },
+            "400": {
+              "description": "Invalid tag value"
+            }
+          }
+        }
+      },
+      "/moneda/conversion": {
+        "get": {
+          "tags": ["Criptomonedas"],
+          "summary": "Convertir un valor a una determinada moneda.",
+          "description": "",
+          "produces": ["application/json"],
+          "parameters": [
+            {
+              "name": "qty",
+              "in": "query",
+              "type": "number",
+              "description": "Valor convertir",
+              "required": true
+            },
+  
+            {
+              "name": "from",
+              "in": "query",
+              "type": "string",
+              "description": "Valor convertir",
+              "required": true
+            },
+  
+            {
+              "name": "to",
+              "in": "query",
+              "type": "string",
+              "description": "Valor convertir",
+              "required": true
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "successful operation",
+              "schema": {
+                "$ref": "#/definitions/ConversionMonedaResponse"
+              }
+            },
+            "400": {
+              "description": "Invalid tag value"
+            }
+          }
+        }
+      },
+      "/usuario/criptomonedas": {
+        "get": {
+          "tags": ["Criptomonedas"],
+          "summary": "Listado de monedas por usuario.",
+          "description": "",
+          "produces": ["application/json"],
+          "parameters": [
+            {
+              "in": "header",
+              "name": "Authorization",
+              "description": "token que se obtiene cuando el usuario se loguea",
+              "required": true,
+              "type": "string"
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "successful operation",
+              "schema": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/definitions/CriptomonedaUsuarioResponse"
+                }
+              }
+            },
+            "400": {
+              "description": "Invalid tag value"
+            }
+          }
+        }
+      },
+      "/criptomoneda/agregar": {
+        "post": {
+          "tags": ["Criptomonedas"],
+          "summary": "Agregar nuevas criptomonedas usuario",
+          "description": "",
+          "produces": ["application/json"],
+          "parameters": [
+            {
+              "name": "body",
+              "in": "body",
+              "required": true,
+              "schema": {
+              "$ref": "#/definitions/CriptomonedaSaveRequest"
+              }
+            },
+            {
+              "in": "header",
+              "name": "Authorization",
+              "description": "token que se obtiene cuando el usuario se loguea",
+              "required": true,
+              "type": "string"
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "successful operation",
+              "schema": {
+                  "$ref": "#/definitions/CriptomonedaSaveResponse"
+              }
+            },
+            "400": {
+              "description": "Bad Request"
+            }
+          }
+        }
+      }
+    },
+    "definitions": {
+      "CriptomonedaListaResponse": {
+        "type": "object",
+        "properties": {
+          "totalPrices": {
+            "type": "number"
+          },
+          "prices": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+              "id_currency": {
+                "type": "string"
+              },
+              "name": {
+                "type": "string"
+              },
+              "price": {
+                "type": "string"
+              },
+              "crypto": {
+                "type": "string"
+              }
+            }
+          }
+          }
+        }
+      },
+      "ConversionMonedaResponse": {
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean"
+          },
+          "source": {
+            "type": "string"
+          },
+          "request_date": {
+            "type": "string"
+          },
+          "from_quantity": {
+            "type": "string"
+          },
+          "from_symbol": {
+            "type": "string"
+          },
+          "from_name": {
+            "type": "string"
+          },
+          "to_symbol": {
+            "type": "string"
+          },
+          "to_name": {
+            "type": "string"
+          },
+          "to_quantity": {
+            "type": "number"
+          }
+        }
+      },
+      "CriptomonedaUsuarioResponse": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number"
+          },
+          "nombre": {
+            "type": "string"
+          },
+          "fuente": {
+            "type": "string"
+          },
+          "precio": {
+            "type": "number"
+          },
+          "usuario_id": {
+            "type": "number"
+          }
+        }
+      },
+      "LoginResponse": {
+        "type": "object",
+        "properties": {
+          "token": {
+            "type": "string"
+          },
+          "usuario": {
+            "type": "object",
+            "properties":{
+              "username": {
+                "type": "string"
+              },
+              "id": {
+                "type":"number"
+              },
+              "moneda": {
+                "type":"string"
+              }
+            }
+          }
+        }
+      },
+      "LoginRequest": {
+        "type": "object",
+        "properties": {
+          "username": {
+            "type": "string"
+          },
+          "clave": {
+            "type": "string"
+          }
+        }
+      },
+      "RegistroUsuarioRequest": {
+        "type": "object",
+        "properties": {
+          "nombre": {
+            "type": "string"
+          },
+          "apellido": {
+            "type": "string"
+          },
+          "username": {
+            "type": "string"
+          },
+          "clave": {
+            "type": "string"
+          },
+          "moneda": {
+            "type": "string"
+          }
+        }
+      },
+      "RegistroUsuarioResponse": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number"
+          },
+          "nombre": {
+            "type": "string"
+          },
+          "apellido": {
+            "type": "string"
+          },
+          "username": {
+            "type": "string"
+          },
+          "moneda": {
+            "type": "string"
+          }
+        }
+      },
+      "CriptomonedaSaveRequest": {
+        "type": "object",
+        "properties": {
+          "nombre": {
+            "type": "string"
+          },
+          "fuente": {
+            "type": "string"
+          },
+          "precio": {
+            "type": "number"
+          }
+        }
+      },
+      "CriptomonedaSaveResponse": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number"
+          },
+          "nombre": {
+            "type": "string"
+          },
+          "fuente": {
+            "type": "string"
+          },
+          "precio": {
+            "type": "number"
+          },
+          "user_id": {
+            "type": "number"
+          }
+        }
+      },
+      "ApiResponse": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "type": {
+            "type": "string"
+          },
+          "message": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  }
+  

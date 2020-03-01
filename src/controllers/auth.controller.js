@@ -8,9 +8,10 @@ class AuthController {
     }
 
     async singnUp(req,res){
-        console.log("aqui llego")
+        
         const {body} = req;
         const usuarioCreado = await _authService.signUp(body);
+        delete usuarioCreado.clave;
         return res.status(201).send(usuarioCreado);
 
     }
