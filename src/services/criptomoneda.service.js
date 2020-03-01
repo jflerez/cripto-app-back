@@ -14,7 +14,36 @@ class CriptomonedaService {
             throw error;
         }
         
-        return await _criptomonedaRepository.getCriptomonedasByUsuario(usuarioId);
+        //return await _criptomonedaRepository.getCriptomonedasByUsuario(usuarioId);
+        return {
+            "totalPrices": 4,
+            "prices": [
+                {
+                    "id_currency": "CLP",
+                    "name": "Chilean Peso",
+                    "price": "6940551.46640958",
+                    "crypto": "0"
+                },
+                {
+                    "id_currency": "CNH",
+                    "name": "Chinese Yuan Offshore",
+                    "price": "59315.71151348",
+                    "crypto": "0"
+                },
+                {
+                    "id_currency": "CNY",
+                    "name": "Chinese Yuan",
+                    "price": "59331.83613788",
+                    "crypto": "0"
+                },
+                {
+                    "id_currency": "COP",
+                    "name": "Colombian Peso",
+                    "price": "29626072.14653907",
+                    "crypto": "0"
+                }
+            ]
+        }
     }
 
     async createCriptomoneda(criptomoneda){
