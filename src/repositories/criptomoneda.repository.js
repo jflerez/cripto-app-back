@@ -4,7 +4,7 @@ class CriptomonedaRepository{
 
     async getCriptomonedasByUsuario(usuarioId) {
         
-        return Criptomoneda.findAll({
+        return await Criptomoneda.findAll({
             where: {
               usuario_id: usuarioId
             }
@@ -14,7 +14,7 @@ class CriptomonedaRepository{
 
     async getCriptomonedasTopByUsuario(usuarioId) {
         
-        return Criptomoneda.findAll({
+        return await Criptomoneda.findAll({
             where: {usuario_id: usuarioId},
             group: ['precio'],order: [['precio' ,'DESC']],limit: 3,
             });
