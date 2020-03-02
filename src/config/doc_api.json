@@ -196,6 +196,40 @@
           }
         }
       },
+      "/criptomoneda/top": {
+        "get": {
+          "tags": ["Criptomonedas"],
+          "summary": "Listado top 3 de monedas por usuario.",
+          "description": "",
+          "produces": ["application/json"],
+          "parameters": [
+            {
+              "in": "header",
+              "name": "Authorization",
+              "description": "token que se obtiene cuando el usuario se loguea",
+              "required": true,
+              "type": "string"
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "successful operation",
+              "schema": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/definitions/CriptomonedaUsuarioResponse"
+                }
+              }
+            },
+            "400": {
+              "description": "Invalid tag value"
+            },
+            "403": {
+                "description": "No autorizado para acceder al recurso solicitado."
+              }
+          }
+        }
+      },
       "/criptomoneda/agregar": {
         "post": {
           "tags": ["Criptomonedas"],
