@@ -10,7 +10,7 @@ Posteriormente se debe ejecutar el comando `npm install` con el fin de que se ej
 
 ## Ejecutar pruebas unitarias
 
-Se debrá ejecutar el comando `npm test` para llevar a cabo la ejecución de las pruebas unitarias.
+Se deberá ejecutar el comando `npm test` para llevar a cabo la ejecución de las pruebas unitarias.
 
 ## Documentación API REST
 
