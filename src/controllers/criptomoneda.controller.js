@@ -42,10 +42,6 @@ class CriptomonedaController {
 
        console.log("body procesado: ", body)
 
-       //console.log("conversionMoneda: ", JSON.stringify(conversionMoneda,null,4));
-
-        //const criptomonedaNueva = await _criptomonedaService.createCriptomoneda(body);
-
         return res.send(criptomonedaNueva);
 
     }
