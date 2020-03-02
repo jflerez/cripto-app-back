@@ -18,7 +18,9 @@ class CriptomonedaController {
 
         console.log("req.usuario controller: ", req.usuario.id)
         let usuarioId = req.usuario.id;
+        console.log("req.usuario to 3 monedas: ", req.usuario.id)
         const usuario = await _criptomonedaService.getCriptomonedasTopByUsuario(usuarioId);
+        console.log("list to 3 monedas: ", usuario)
         return res.send(usuario);
 
     }
