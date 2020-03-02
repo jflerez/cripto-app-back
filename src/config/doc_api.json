@@ -189,7 +189,10 @@
             },
             "400": {
               "description": "Invalid tag value"
-            }
+            },
+            "403": {
+                "description": "No autorizado para acceder al recurso solicitado."
+              }
           }
         }
       },
@@ -225,7 +228,10 @@
             },
             "400": {
               "description": "Bad Request"
-            }
+            },
+            "403": {
+                "description": "No autorizado para acceder al recurso solicitado."
+              }
           }
         }
       }
