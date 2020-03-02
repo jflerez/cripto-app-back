@@ -3,5 +3,5 @@ const {JWT_SECRET} = require('../config');
 
 
 module.exports.generateToken = (usuario)=> {
- return sign({usuario}, JWT_SECRET, {expiresIn: 60});
+ return sign({usuario}, JWT_SECRET, {expiresIn: '1h'});
 }
