@@ -6,6 +6,7 @@ API REST encargada de gestionar las criptomonedas.
 
 Como primera medida se debe crear un archivo `.env` en la raíz del proyecto con el fin de establecer todas las variables de entorno con las cuales trabaja el API.
 Posteriormente se debe ejecutar el comando `npm install` con el fin de que se ejecuten todas las dependencias necesarias para llevar a cabo la ejecución de la misma.
+Una vez instaladas las dependencias procedemos a ejecutar el comando `npm start`
 
 
 ## Ejecutar pruebas unitarias
