@@ -26,6 +26,17 @@ class CriptomonedaRepository{
         return await Criptomoneda.create(criptomoneda);
     }
 
+    async getValidarCriptomonedasByUsuario(usuarioId, nombreMoneda) {
+        
+        return await Criptomoneda.findAll({
+            where: {
+              usuario_id: usuarioId,
+              nombre: nombreMoneda
+            }
+          });
+ 
+    }
+
 }
 
 module.exports = CriptomonedaRepository;
