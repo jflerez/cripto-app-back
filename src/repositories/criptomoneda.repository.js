@@ -26,12 +26,12 @@ class CriptomonedaRepository{
         return await Criptomoneda.create(criptomoneda);
     }
 
-    async getValidarCriptomonedasByUsuario(usuarioId, nombreMoneda) {
+    async getValidarCriptomonedasByUsuario(usuarioId, fuenteMoneda) {
         
         return await Criptomoneda.findAll({
             where: {
               usuario_id: usuarioId,
-              nombre: nombreMoneda
+              fuente: fuenteMoneda
             }
           });
  
