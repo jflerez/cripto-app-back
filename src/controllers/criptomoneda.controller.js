@@ -16,11 +16,8 @@ class CriptomonedaController {
 
     async getCriptomonedasTopByUsuario(req, res){
 
-        console.log("req.usuario controller: ", req.usuario.id)
         let usuarioId = req.usuario.id;
-        console.log("req.usuario to 3 monedas: ", req.usuario.id)
         const usuario = await _criptomonedaService.getCriptomonedasTopByUsuario(usuarioId);
-        console.log("list to 3 monedas: ", usuario)
         return res.send(usuario);
 
     }
@@ -29,8 +26,6 @@ class CriptomonedaController {
     async createCriptomoneda(req, res){
         
         const {body} = req;
-
-        console.log("req.usuario moneda: ", req.usuario.moneda)
 
         const conversion = {qty: body.precio, from: body.fuente, to: req.usuario.moneda}
 
@@ -41,8 +36,6 @@ class CriptomonedaController {
        body.usuario_id = req.usuario.id;
 
        const criptomonedaNueva = await _criptomonedaService.createCriptomoneda(body);
-
-       console.log("body procesado: ", body)
 
         return res.send(criptomonedaNueva);
 

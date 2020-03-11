@@ -27,7 +27,7 @@ class CriptomonedaService {
         }
 
        let listExistCriptomoneda = await _criptomonedaRepository.getValidarCriptomonedasByUsuario(criptomoneda.usuario_id,criptomoneda.fuente)
-        console.log("listExistCriptomoneda.length: ", listExistCriptomoneda.length)
+        
        if(listExistCriptomoneda.length > 0){
         const error = new Error();
         error.status = 400;

@@ -10,7 +10,6 @@ class UsuarioController {
     async getCriptomonedasByUsuario(req, res){
         
         let usuarioId = req.usuario.id
-        console.log("usuarioId:", usuarioId)
         const usuario = await _criptomonedaService.getCriptomonedasByUsuario(usuarioId);
         return res.send(usuario);
     }

@@ -10,7 +10,6 @@ class UsuarioService {
     }
 
     async getUsuarioById(usuarioId){
-        console.log("service: _userRepository", _userRepository)
         return await _userRepository.getUsuarioById(usuarioId);
     }
 

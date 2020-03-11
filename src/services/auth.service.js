@@ -48,8 +48,6 @@ class AuthService {
             throw error;
         }
 
-        console.log("moneda del usuario: ", JSON.stringify(userExist,null,4))
-
         const userToEncode = {
             username: userExist.username,
             id: userExist.id,
