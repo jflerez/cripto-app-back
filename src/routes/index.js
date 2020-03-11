@@ -8,7 +8,7 @@ const swaggerUI = require('swagger-ui-express');
 const {SWAGGER_PATH} = require('../config');
 const swaggerDocument = require(SWAGGER_PATH);
 
-module.exports = ({HomeRoutes, UsuarioRoutes, CriptomonedaRoutes, AuthRoutes, BraveNewCoinRoutes})=>{
+module.exports = ({UsuarioRoutes, CriptomonedaRoutes, AuthRoutes, BraveNewCoinRoutes})=>{
 const router = express.Router();
 const apiRoutes = express.Router();
 
@@ -18,7 +18,6 @@ apiRoutes
 use(helmet()).
 use(compression());
 
-apiRoutes.use("/home", HomeRoutes);
 apiRoutes.use("/usuario", UsuarioRoutes);
 apiRoutes.use("/criptomoneda", CriptomonedaRoutes);
 apiRoutes.use("/auth", AuthRoutes);
